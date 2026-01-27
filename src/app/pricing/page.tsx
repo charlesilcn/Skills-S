@@ -9,48 +9,67 @@ import Layout from '@/components/shared/Layout';
 // Subscription plans data
 const plans = [
   {
-    name: 'GO',
-    description: 'Perfect for getting started',
-    price: 9.9,
-    credits: 50,
+    name: 'FREE',
+    description: 'For visitors and trial users',
+    price: 0,
+    credits: 10,
     features: [
-      '50 Credits per month',
-      'Basic download rights',
-      'Community support',
-      'Access to all free skills',
-      'Standard support response time',
+      '10 Credits (one-time bonus)',
+      'Basic content access only',
+      '1 download/call limit per day',
+      'Personal learning only',
+      'Community/documentation support',
+      '50% creator fee',
+    ],
+    popular: false,
+    tier: 'free',
+  },
+  {
+    name: 'GO',
+    description: 'For experience and casual users',
+    price: 9.9,
+    credits: 100,
+    features: [
+      '100 Credits per month (non-rollover)',
+      'Basic + Standard content access',
+      'Unlimited downloads/calls (credit-based)',
+      'Personal use only',
+      'Ticket support (3-day SLA)',
+      '40% creator fee',
     ],
     popular: false,
     tier: 'go',
   },
   {
     name: 'PRO',
-    description: 'For power users and small teams',
-    price: 39,
-    credits: 300,
+    description: 'For developers and power users',
+    price: 29,
+    credits: 600,
     features: [
-      '300 Credits per month',
-      'Priority support',
-      'Access to exclusive skills',
-      'Advanced analytics',
-      'Early access to new features',
-      'Priority support response time',
+      '600 Credits per month',
+      'Full site access (including Expert content)',
+      'Unlimited downloads/calls (credit-based)',
+      'Personal commercial use',
+      'Priority support (24-hour SLA)',
+      '20% creator fee + private coaching',
     ],
     popular: true,
     tier: 'pro',
   },
   {
     name: 'ULTRA',
-    description: 'Enterprise-grade features',
+    description: 'For enterprise and professional teams',
     price: 159,
     credits: 1500,
     features: [
       '1500 Credits per month',
-      'Commercial license',
-      'API access',
-      'Team collaboration tools',
-      'Dedicated account manager',
+      'Full site access + exclusive content',
+      'Unlimited downloads/calls (credit-based)',
+      'Full commercial license',
       '24/7 priority support',
+      '10% creator fee + dedicated account manager',
+      'Team collaboration tools',
+      'API access',
       'Custom integrations',
     ],
     popular: false,
@@ -62,7 +81,7 @@ const plans = [
 const faqs = [
   {
     question: 'How do credits work?',
-    answer: 'Credits are the currency used on our platform to purchase AI skills. Each skill has a credit cost, and you can use your monthly credits to buy any skills you need.',
+    answer: 'Credits are the currency used on our platform to purchase AI skills. Each skill has a credit cost, and you can use your monthly credits to buy any skills you need. FREE plan users get 10 one-time credits, while paid plans receive monthly credits.',
   },
   {
     question: 'Can I upgrade or downgrade my plan?',
@@ -70,11 +89,19 @@ const faqs = [
   },
   {
     question: 'What happens if I run out of credits?',
-    answer: 'If you run out of credits before the end of your billing cycle, you can purchase additional credits or upgrade your plan to get more credits.',
+    answer: 'If you run out of credits before the end of your billing cycle, you can purchase additional credits or upgrade your plan to get more credits. FREE plan users will be limited to 1 download/call per day once their initial credits are used.',
   },
   {
     question: 'Is there a free trial?',
-    answer: 'Yes, we offer a 14-day free trial for all plans. You can cancel at any time during the trial period without being charged.',
+    answer: 'Yes, we offer a FREE plan with 10 one-time credits for all users. For paid plans, we offer a 14-day free trial. You can cancel at any time during the trial period without being charged.',
+  },
+  {
+    question: 'How does the creator fee work?',
+    answer: 'When you sell AI skills on our platform, you keep a percentage of the sales. FREE plan creators keep 50%, GO plan creators keep 40%, PRO plan creators keep 20% + get private coaching, and ULTRA plan creators get additional benefits.',
+  },
+  {
+    question: 'What are the content access levels?',
+    answer: 'We have three content access levels: Basic (available to all plans), Standard (available to GO+ plans), and Expert (available to PRO+ plans). ULTRA plans get full access plus exclusive content.',
   },
   {
     question: 'How secure is my data?',
@@ -125,7 +152,7 @@ const PricingPage = () => {
           </motion.div>
 
           {/* Plans Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
             {plans.map((plan, index) => (
               <motion.div
                 key={plan.tier}
@@ -206,31 +233,33 @@ const PricingPage = () => {
                 </tr>
               </thead>
               <tbody>
-                {[
-                  { name: 'Monthly Credits', values: [50, 300, 1500] },
-                  { name: 'Download Rights', values: ['Basic', 'Advanced', 'Unlimited'] },
-                  { name: 'Priority Support', values: ['✗', '✓', '✓'] },
-                  { name: 'Exclusive Skills', values: ['✗', '✓', '✓'] },
-                  { name: 'API Access', values: ['✗', '✗', '✓'] },
-                  { name: 'Commercial License', values: ['✗', '✗', '✓'] },
-                  { name: 'Team Collaboration', values: ['✗', '✓', '✓'] },
-                  { name: 'Advanced Analytics', values: ['✗', '✓', '✓'] },
-                ].map((feature, index) => (
-                  <tr key={index} className="border-b border-white/10 hover:bg-slate-700/50 transition-colors">
-                    <td className="p-6 text-white font-medium">{feature.name}</td>
-                    {feature.values.map((value, i) => (
-                      <td key={i} className="p-6 text-center">
-                        {typeof value === 'string' && value === '✓' ? (
-                          <span className="text-emerald-400">✓</span>
-                        ) : typeof value === 'string' && value === '✗' ? (
-                          <span className="text-gray-600">✗</span>
-                        ) : (
-                          <span className="text-white">{value}</span>
-                        )}
-                      </td>
-                    ))}
-                  </tr>
-                ))}
+                {
+                  [
+                    { name: 'Monthly Credits', values: ['10 (one-time)', '100 (non-rollover)', '600', '1500'] },
+                    { name: 'Content Access', values: ['Basic only', 'Basic + Standard', 'Full access', 'Full + Exclusive'] },
+                    { name: 'Download Limit', values: ['1 per day', 'Unlimited (credit-based)', 'Unlimited (credit-based)', 'Unlimited (credit-based)'] },
+                    { name: 'License', values: ['Personal learning', 'Personal use', 'Personal commercial', 'Full commercial'] },
+                    { name: 'Support', values: ['Community', 'Ticket (3-day)', 'Priority (24-hour)', '24/7 Priority'] },
+                    { name: 'Creator Fee', values: ['50%', '40%', '20% + coaching', '10% + manager'] },
+                    { name: 'Team Collaboration', values: ['✗', '✗', '✗', '✓'] },
+                    { name: 'API Access', values: ['✗', '✗', '✗', '✓'] },
+                  ].map((feature, index) => (
+                    <tr key={index} className="border-b border-white/10 hover:bg-slate-700/50 transition-colors">
+                      <td className="p-6 text-white font-medium">{feature.name}</td>
+                      {feature.values.map((value, i) => (
+                        <td key={i} className="p-6 text-center">
+                          {typeof value === 'string' && value === '✓' ? (
+                            <span className="text-emerald-400">✓</span>
+                          ) : typeof value === 'string' && value === '✗' ? (
+                            <span className="text-gray-600">✗</span>
+                          ) : (
+                            <span className="text-white">{value}</span>
+                          )}
+                        </td>
+                      ))}
+                    </tr>
+                  ))
+                }
               </tbody>
             </table>
           </motion.div>
