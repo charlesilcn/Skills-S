@@ -1,105 +1,105 @@
 # AI Skills Shop
 
-AI Skills Shop 是一个现代化的AI技能交易平台，采用积分制商业模型和创作者激励体系，为用户提供按需获取AI能力的解决方案。
+AI Skills Shop is a modern AI skill trading platform that uses a credit-based business model and creator incentive system to provide users with on-demand AI capabilities.
 
-## 项目概述
+## Project Overview
 
-基于Vibe Stack技术栈构建的暗色系、现代、专业的AI技能交易平台，旨在连接AI技能创作者和使用者，通过订阅制和积分系统实现价值流转。
+A dark-themed, modern, professional AI skill trading platform built on the Vibe Stack technology stack, designed to connect AI skill creators and users, enabling value flow through subscription and credit systems.
 
-## 技术栈
+## Technology Stack
 
-- **前端框架**：Next.js 15 (App Router) + TypeScript
-- **样式方案**：Tailwind CSS + Shadcn/ui
-- **动画效果**：Framer Motion
-- **数据库**：PostgreSQL + Drizzle ORM
-- **身份认证**：Clerk
-- **支付系统**：Stripe Connect
-- **文件存储**：Cloudflare R2 / AWS S3
-- **响应式设计**：适配各种设备
+- **Frontend Framework**: Next.js 15 (App Router) + TypeScript
+- **Styling Solution**: Tailwind CSS + Shadcn/ui
+- **Animation Effects**: Framer Motion
+- **Database**: PostgreSQL + Drizzle ORM
+- **Authentication**: Clerk
+- **Payment System**: Stripe Connect
+- **File Storage**: Cloudflare R2 / AWS S3
+- **Responsive Design**: Adapted for various devices
 
-## 核心功能
+## Core Features
 
-### 1. 订阅体系
+### 1. Subscription System
 
-| 订阅计划 | 价格 | 积分 | 核心权益 |
-|---------|------|------|----------|
-| **FREE** | $0/永久免费 | 10积分(注册仅赠送一次) | 基础内容访问，每日限1次下载/调用，仅限个人学习 |
-| **GO** | $9.9/月 | 100积分/月(不可滚存) | 基础+标准内容访问，无限制下载/调用(受积分约束)，仅限个人使用 |
-| **PRO** | $29/月 | 600积分/月 | 全站解锁(含专家级内容)，个人商业辅助，优先支持 |
-| **ULTRA** | $159/月 | 1500积分/月 | 完整商业授权，API访问，团队协作工具，专属客户经理 |
+| Plan | Price | Credits | Core Benefits |
+|------|-------|---------|---------------|
+| **FREE** | $0/FREE | 10 Credits (one-time bonus) | Basic content access, 1 download/call limit per day, personal learning only |
+| **GO** | $9.9/month | 100 Credits/month (non-rollover) | Basic + Standard content access, unlimited downloads/calls (credit-based), personal use only |
+| **PRO** | $29/month | 600 Credits/month | Full site access (including expert content), personal commercial use, priority support |
+| **ULTRA** | $159/month | 1500 Credits/month | Full commercial license, API access, team collaboration tools, dedicated account manager |
 
-### 2. 积分系统
+### 2. Credit System
 
-- 用户通过订阅获得积分
-- 积分用于购买AI技能
-- 创作者获得积分收益
-- 支持积分提现
+- Users receive credits through subscriptions
+- Credits are used to purchase AI skills
+- Creators earn credit income
+- Credit withdrawal is supported
 
-### 3. 创作者激励
+### 3. Creator Incentives
 
-- 前100名入驻创作者获得永久90%分成
-- 动态评级和曝光机制
-- 实时收益看板
-- 技能版本管理
+- First 100 creators get permanent 90% revenue share
+- Dynamic rating and exposure mechanism
+- Real-time earnings dashboard
+- Skill version management
 
-### 4. 平台功能
+### 4. Platform Features
 
-- **技能集市**：AI技能展示、搜索、筛选
-- **卖家中心**：技能创建、管理、收益分析
-- **买家中心**：技能购买、使用、管理
-- **订阅管理**：计划升级、降级、续费
+- **Skill Marketplace**: AI skill display, search, filtering
+- **Seller Center**: Skill creation, management, earnings analysis
+- **Buyer Center**: Skill purchase, usage, management
+- **Subscription Management**: Plan upgrade, downgrade, renewal
 
-## 项目结构
+## Project Structure
 
 ```
 /app
-├── (platform)        # 核心业务区
-│   ├── dashboard     # 买家中心
-│   ├── marketplace   # 技能集市
-│   └── studio        # 卖家中心
-├── pricing           # 订阅定价页面
+├── (platform)        # Core business area
+│   ├── dashboard     # Buyer center
+│   ├── marketplace   # Skill marketplace
+│   └── studio        # Seller center
+├── pricing           # Subscription pricing page
 ├── favicon.ico
 ├── globals.css
 ├── layout.tsx
-├── page.tsx          # 首页Landing Page
+├── page.tsx          # Home Landing Page
 └── middleware.ts
 /components
-├── /shared           # 业务组件
+├── /shared           # Business components
 │   ├── Footer.tsx
 │   ├── Layout.tsx
 │   └── Navbar.tsx
-└── /ui               # Shadcn基础组件
+└── /ui               # Shadcn base components
 /db                   # Drizzle Schema
-/lib                  # 工具库
+/lib                  # Utility library
 ```
 
-## 快速开始
+## Quick Start
 
-### 1. 环境要求
+### 1. Environment Requirements
 
-- Node.js 18.17.0 或更高版本
-- npm 9.6.7 或更高版本
-- PostgreSQL 14.0 或更高版本
+- Node.js 18.17.0 or higher
+- npm 9.6.7 or higher
+- PostgreSQL 14.0 or higher
 
-### 2. 安装依赖
+### 2. Install Dependencies
 
 ```bash
 npm install
 ```
 
-### 3. 配置环境变量
+### 3. Configure Environment Variables
 
-创建 `.env.local` 文件并添加以下内容：
+Create a `.env.local` file and add the following content:
 
 ```env
-# PostgreSQL 数据库连接
+# PostgreSQL Database Connection
 DATABASE_URL="postgresql://username:password@localhost:5432/ai-skills-shop"
 
-# Clerk 身份认证
+# Clerk Authentication
 NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY="your-clerk-publishable-key"
 CLERK_SECRET_KEY="your-clerk-secret-key"
 
-# Stripe 支付
+# Stripe Payment
 STRIPE_SECRET_KEY="your-stripe-secret-key"
 NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY="your-stripe-publishable-key"
 
@@ -110,72 +110,81 @@ R2_BUCKET_NAME="your-r2-bucket-name"
 R2_ACCOUNT_ID="your-r2-account-id"
 ```
 
-### 4. 运行开发服务器
+### 4. Run Development Server
 
 ```bash
 npm run dev
 ```
 
-打开 [http://localhost:3000](http://localhost:3000) 查看应用。
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-### 5. 构建生产版本
+### 5. Build Production Version
 
 ```bash
 npm run build
 ```
 
-### 6. 启动生产服务器
+### 6. Start Production Server
 
 ```bash
 npm start
 ```
 
-## 部署
+## Deployment
 
-### Vercel 部署
+### Vercel Deployment
 
-1. 连接 GitHub 仓库到 Vercel
-2. 配置环境变量（与 `.env.local` 相同）
-3. 点击 "Deploy" 按钮
-4. 部署完成后配置自定义域名（可选）
+1. Connect GitHub repository to Vercel
+2. Configure environment variables (same as `.env.local`)
+3. Click "Deploy" button
+4. Configure custom domain after deployment (optional)
 
-### 数据库配置
+### Database Configuration
 
-1. 在 PostgreSQL 中创建数据库
-2. 运行数据库迁移：
+1. Create database in PostgreSQL
+2. Run database migrations:
    ```bash
    npx drizzle-kit push:pg
    ```
 
-### Stripe 配置
+### Stripe Configuration
 
-1. 创建 Stripe 账户
-2. 配置 Webhook 端点
-3. 获取 API 密钥并添加到环境变量
+1. Create Stripe account
+2. Configure Webhook endpoints
+3. Get API keys and add to environment variables
 
-## 商业模型
+## Business Model
 
-### 收入来源
+### Revenue Sources
 
-1. **订阅费用**：用户订阅不同等级的计划
-2. **交易手续费**：技能交易的平台分成
-3. **创作者会员**：高级创作者服务
+1. **Subscription Fees**: Users subscribe to different tier plans
+2. **Transaction Fees**: Platform share of skill transactions
+3. **Creator Membership**: Premium creator services
 
-### 创作者分成
+### Creator Revenue Share
 
-- FREE 计划创作者：50% 分成
-- GO 计划创作者：40% 分成
-- PRO 计划创作者：20% 分成 + 私人辅导
-- ULTRA 计划创作者：10% 分成 + 专属客户经理
+- FREE plan creators: 50% revenue share
+- GO plan creators: 40% revenue share
+- PRO plan creators: 20% revenue share + private coaching
+- ULTRA plan creators: 10% revenue share + dedicated account manager
 
-## 技术亮点
+## Technical Highlights
 
-1. **现代化架构**：Next.js 15 App Router + TypeScript
-2. **性能优化**：静态生成、服务器组件、客户端缓存
-3. **用户体验**：暗色系主题、流畅动画、响应式设计
-4. **安全可靠**：Clerk 认证、Stripe 支付、数据加密
-5. **可扩展性**：模块化设计、Serverless 优先架构
+1. **Modern Architecture**: Next.js 15 App Router + TypeScript
+2. **Performance Optimization**: Static generation, server components, client-side caching
+3. **User Experience**: Dark theme, smooth animations, responsive design
+4. **Security**: Clerk authentication, Stripe payment, data encryption
+5. **Scalability**: Modular design, Serverless-first architecture
 
-## 许可证
+## License
 
-MIT License - 详见 [LICENSE](LICENSE) 文件
+MIT License - See [LICENSE](LICENSE) file
+
+## Contact
+
+- Project URL: https://github.com/charlesilcn/Skills-S
+- Issue Reporting: https://github.com/charlesilcn/Skills-S/issues
+
+---
+
+**AI Superpowers. On Demand.**
