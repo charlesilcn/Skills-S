@@ -180,11 +180,5 @@ npm start
 
 MIT License - See [LICENSE](LICENSE) file
 
-## Contact
-
-- Project URL: https://github.com/charlesilcn/Skills-S
-- Issue Reporting: https://github.com/charlesilcn/Skills-S/issues
-
----
 
 **AI Superpowers. On Demand.**

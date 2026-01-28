@@ -38,6 +38,9 @@ node_modules/
 dist/
 build/
 
+# Auto-generated files
+next-env.d.ts
+
 # Testing
 coverage/
 .nyc_output/
