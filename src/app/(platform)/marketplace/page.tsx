@@ -272,89 +272,127 @@ const MarketplacePage = () => {
         </div>
       </section>
 
-      {/* Open Source Skills Ranking */}
-      <section className="py-16 px-4 bg-slate-900">
+      {/* Skills Ranking */}
+      <section className="py-16 px-4 bg-gradient-to-b from-slate-950 to-slate-900">
         <div className="container mx-auto max-w-6xl">
-          <div className="flex justify-between items-center mb-8">
-            <h2 className="text-2xl font-bold text-white">
-              <span className="bg-gradient-to-r from-indigo-500 to-violet-600 bg-clip-text text-transparent">Open Source</span> Skills Ranking
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
+              <span className="bg-gradient-to-r from-indigo-500 to-violet-600 bg-clip-text text-transparent">Top Skills</span> Ranking
             </h2>
-            <div className="text-sm text-gray-400">
-              Top {rankedOpenSourceSkills.length} open source skills
-            </div>
-          </div>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Discover the most popular and useful AI skills created by our community
+            </p>
+          </motion.div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <div className="space-y-4">
             {rankedOpenSourceSkills.map((skill, index) => (
               <motion.div
                 key={skill.id}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.1 * index }}
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.4, delay: 0.1 * index }}
                 viewport={{ once: true }}
-                className="relative bg-slate-800 rounded-xl overflow-hidden border border-white/10 hover:border-white/20 transition-all hover:shadow-lg hover:shadow-indigo-500/10"
+                whileHover={{ scale: 1.01 }}
+                className="bg-slate-800 rounded-xl overflow-hidden border border-white/10 hover:border-indigo-500/30 transition-all hover:shadow-lg hover:shadow-indigo-500/10"
               >
-                <div className="p-6">
+                <div className="p-6 md:p-8 flex flex-col md:flex-row items-start md:items-center gap-6">
                   {/* Rank Badge */}
-                  <div className="absolute top-4 right-4 bg-indigo-500 text-white text-sm font-bold px-3 py-1 rounded-full">
-                    #{index + 1}
-                  </div>
-                  
-                  {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {skill.tags.map((tag, tagIndex) => (
-                      <span
-                        key={tagIndex}
-                        className="text-xs px-3 py-1 bg-slate-700 rounded-full text-gray-300"
-                      >
-                        {tag}
-                      </span>
-                    ))}
+                  <div className={`flex-shrink-0 w-12 h-12 rounded-full flex items-center justify-center font-bold text-xl ${
+                    index === 0 ? 'bg-gradient-to-br from-yellow-400 to-yellow-600 text-black' :
+                    index === 1 ? 'bg-gradient-to-br from-gray-300 to-gray-500 text-black' :
+                    index === 2 ? 'bg-gradient-to-br from-amber-700 to-amber-900 text-amber-200' :
+                    'bg-slate-700 text-white'
+                  }`}>
+                    {index + 1}
                   </div>
 
-                  {/* Title and Description */}
-                  <h3 className="text-xl font-bold text-white mb-2">
-                    {skill.title}
-                  </h3>
-                  <p className="text-gray-400 mb-6 line-clamp-2">
-                    {skill.description}
-                  </p>
+                  {/* Main Content */}
+                  <div className="flex-1 flex flex-col md:flex-row md:items-center gap-4 md:gap-8">
+                    {/* Title and Description */}
+                    <div className="flex-1">
+                      {/* Tags */}
+                      <div className="flex flex-wrap gap-2 mb-3">
+                        {skill.tags.map((tag, tagIndex) => (
+                          <span
+                            key={tagIndex}
+                            className="text-xs px-3 py-1 bg-indigo-500/20 rounded-full text-indigo-300"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                      
+                      <h3 className="text-xl font-bold text-white mb-2">
+                        {skill.title}
+                      </h3>
+                      <p className="text-gray-400 mb-3 line-clamp-2">
+                        {skill.description}
+                      </p>
+                      
+                      {/* Author and Last Updated */}
+                      <div className="flex items-center gap-4 text-sm text-gray-500">
+                        <div className="flex items-center gap-2">
+                          <div className="w-6 h-6 rounded-full bg-slate-700 flex items-center justify-center">
+                            <span className="text-xs font-medium">{skill.author.charAt(0)}</span>
+                          </div>
+                          <span>{skill.author}</span>
+                        </div>
+                        <span>•</span>
+                        <span>Updated: {skill.lastUpdated}</span>
+                      </div>
+                    </div>
 
-                  {/* Author and Stats */}
-                  <div className="flex items-center justify-between mb-6">
-                    <div className="flex items-center gap-2">
-                      <div className="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center">
-                        <span className="text-xs font-medium">{skill.author.charAt(0)}</span>
+                    {/* Stats and Button */}
+                    <div className="flex items-center gap-6 md:gap-8">
+                      {/* Stats */}
+                      <div className="flex items-center gap-4">
+                        <div className="flex items-center gap-2">
+                          <span className="text-yellow-400 text-lg">⭐</span>
+                          <span className="text-white font-medium">{skill.stars.toLocaleString()}</span>
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="text-green-400 text-lg">🔄</span>
+                          <span className="text-white font-medium">{skill.forks.toLocaleString()}</span>
+                        </div>
                       </div>
-                      <div>
-                        <div className="text-sm font-medium text-white">{skill.author}</div>
-                      </div>
+                      
+                      {/* Button */}
+                      <Button className="bg-indigo-500 hover:bg-indigo-600 text-white px-6">
+                        Install
+                      </Button>
                     </div>
-                    <div className="flex items-center gap-3">
-                      <div className="flex items-center gap-1">
-                        <span className="text-yellow-400">⭐</span>
-                        <span className="text-sm text-white">{skill.stars}</span>
-                      </div>
-                      <div className="flex items-center gap-1">
-                        <span className="text-gray-400">🔄</span>
-                        <span className="text-sm text-white">{skill.forks}</span>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Last Updated and Button */}
-                  <div className="flex items-center justify-between">
-                    <div className="text-xs text-gray-500">
-                      Updated: {skill.lastUpdated}
-                    </div>
-                    <Button className="bg-indigo-500 hover:bg-indigo-600 text-white">
-                      Install
-                    </Button>
                   </div>
                 </div>
               </motion.div>
             ))}
           </div>
+
+          {/* CTA */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="mt-12 bg-slate-800 rounded-xl p-8 border border-white/10"
+          >
+            <div className="text-center">
+              <h3 className="text-2xl font-bold text-white mb-4">
+                Want to see your skill in the rankings?
+              </h3>
+              <p className="text-gray-400 mb-6">
+                Create and publish your own AI skills to join the leaderboard
+              </p>
+              <Button size="lg" className="bg-indigo-500 hover:bg-indigo-600 text-white px-8">
+                Start Creating
+              </Button>
+            </div>
+          </motion.div>
         </div>
       </section>
 
