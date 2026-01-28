@@ -70,6 +70,73 @@ const mockSkills = [
   },
 ];
 
+// Mock data for open source skills (ranked)
+const openSourceSkills = [
+  {
+    id: 101,
+    title: 'Git Assistant',
+    description: 'Automate Git operations and generate commit messages from code changes.',
+    author: 'Open Source Contributors',
+    stars: 1200,
+    forks: 250,
+    lastUpdated: '2026-01-25',
+    tags: ['Git', 'Version Control', 'Developer'],
+  },
+  {
+    id: 102,
+    title: 'Markdown Generator',
+    description: 'Convert natural language to well-formatted Markdown documents.',
+    author: 'Open Source Community',
+    stars: 950,
+    forks: 180,
+    lastUpdated: '2026-01-24',
+    tags: ['Markdown', 'Writing', 'Documentation'],
+  },
+  {
+    id: 103,
+    title: 'JSON Validator',
+    description: 'Validate and format JSON data with detailed error messages.',
+    author: 'Open Source Developers',
+    stars: 820,
+    forks: 150,
+    lastUpdated: '2026-01-23',
+    tags: ['JSON', 'Validation', 'Data'],
+  },
+  {
+    id: 104,
+    title: 'Weather Forecast',
+    description: 'Get accurate weather forecasts for any location worldwide.',
+    author: 'Open Source Project',
+    stars: 780,
+    forks: 130,
+    lastUpdated: '2026-01-22',
+    tags: ['Weather', 'API', 'Utility'],
+  },
+  {
+    id: 105,
+    title: 'Password Generator',
+    description: 'Create strong, secure passwords with customizable parameters.',
+    author: 'Open Source Team',
+    stars: 650,
+    forks: 100,
+    lastUpdated: '2026-01-21',
+    tags: ['Security', 'Passwords', 'Utility'],
+  },
+  {
+    id: 106,
+    title: 'URL Shortener',
+    description: 'Shorten long URLs and track click statistics.',
+    author: 'Open Source Contributors',
+    stars: 580,
+    forks: 90,
+    lastUpdated: '2026-01-20',
+    tags: ['URL', 'Utility', 'Analytics'],
+  },
+];
+
+// Sort open source skills by stars (ranked)
+const rankedOpenSourceSkills = [...openSourceSkills].sort((a, b) => b.stars - a.stars);
+
 const MarketplacePage = () => {
   return (
     <Layout>
@@ -196,6 +263,92 @@ const MarketplacePage = () => {
                     </div>
                     <Button className="bg-indigo-500 hover:bg-indigo-600 text-white">
                       Buy Now
+                    </Button>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Open Source Skills Ranking */}
+      <section className="py-16 px-4 bg-slate-900">
+        <div className="container mx-auto max-w-6xl">
+          <div className="flex justify-between items-center mb-8">
+            <h2 className="text-2xl font-bold text-white">
+              <span className="bg-gradient-to-r from-indigo-500 to-violet-600 bg-clip-text text-transparent">Open Source</span> Skills Ranking
+            </h2>
+            <div className="text-sm text-gray-400">
+              Top {rankedOpenSourceSkills.length} open source skills
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            {rankedOpenSourceSkills.map((skill, index) => (
+              <motion.div
+                key={skill.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 * index }}
+                viewport={{ once: true }}
+                className="relative bg-slate-800 rounded-xl overflow-hidden border border-white/10 hover:border-white/20 transition-all hover:shadow-lg hover:shadow-indigo-500/10"
+              >
+                <div className="p-6">
+                  {/* Rank Badge */}
+                  <div className="absolute top-4 right-4 bg-indigo-500 text-white text-sm font-bold px-3 py-1 rounded-full">
+                    #{index + 1}
+                  </div>
+                  
+                  {/* Tags */}
+                  <div className="flex flex-wrap gap-2 mb-4">
+                    {skill.tags.map((tag, tagIndex) => (
+                      <span
+                        key={tagIndex}
+                        className="text-xs px-3 py-1 bg-slate-700 rounded-full text-gray-300"
+                      >
+                        {tag}
+                      </span>
+                    ))}
+                  </div>
+
+                  {/* Title and Description */}
+                  <h3 className="text-xl font-bold text-white mb-2">
+                    {skill.title}
+                  </h3>
+                  <p className="text-gray-400 mb-6 line-clamp-2">
+                    {skill.description}
+                  </p>
+
+                  {/* Author and Stats */}
+                  <div className="flex items-center justify-between mb-6">
+                    <div className="flex items-center gap-2">
+                      <div className="w-8 h-8 rounded-full bg-slate-700 flex items-center justify-center">
+                        <span className="text-xs font-medium">{skill.author.charAt(0)}</span>
+                      </div>
+                      <div>
+                        <div className="text-sm font-medium text-white">{skill.author}</div>
+                      </div>
+                    </div>
+                    <div className="flex items-center gap-3">
+                      <div className="flex items-center gap-1">
+                        <span className="text-yellow-400">⭐</span>
+                        <span className="text-sm text-white">{skill.stars}</span>
+                      </div>
+                      <div className="flex items-center gap-1">
+                        <span className="text-gray-400">🔄</span>
+                        <span className="text-sm text-white">{skill.forks}</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Last Updated and Button */}
+                  <div className="flex items-center justify-between">
+                    <div className="text-xs text-gray-500">
+                      Updated: {skill.lastUpdated}
+                    </div>
+                    <Button className="bg-indigo-500 hover:bg-indigo-600 text-white">
+                      Install
                     </Button>
                   </div>
                 </div>
